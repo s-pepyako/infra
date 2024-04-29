@@ -4,5 +4,11 @@
 variable "region" {
   description = "AWS region"
   type        = string
-  default     = "us-east-2"
+  default     = "eu-central-1"
+}
+
+variable "cluster_name" {
+  description = "Claster Name"
+  type        = string
+  default     = "AWS-EKS-cluster"
 }

@@ -1,6 +1,3 @@
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
 provider "aws" {
   region = var.region
 }
@@ -15,19 +12,14 @@ data "aws_availability_zones" "available" {
 }
 
 locals {
-  cluster_name = "education-eks-${random_string.suffix.result}"
-}
-
-resource "random_string" "suffix" {
-  length  = 8
-  special = false
+  cluster_name = var.cluster_name
 }
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.0.0"
 
-  name = "education-vpc"
+  name = "${var.cluster_name}-vpc"
 
   cidr = "10.0.0.0/16"
   azs  = slice(data.aws_availability_zones.available.names, 0, 3)
@@ -55,7 +47,7 @@ module "eks" {
   version = "19.15.3"
 
   cluster_name    = local.cluster_name
-  cluster_version = "1.27"
+  cluster_version = "1.29"
 
   vpc_id                         = module.vpc.vpc_id
   subnet_ids                     = module.vpc.private_subnets
@@ -74,18 +66,9 @@ module "eks" {
 
       min_size     = 1
       max_size     = 3
-      desired_size = 2
-    }
-
-    two = {
-      name = "node-group-2"
-
-      instance_types = ["t3.small"]
-
-      min_size     = 1
-      max_size     = 2
       desired_size = 1
     }
+
   }
 }
 
