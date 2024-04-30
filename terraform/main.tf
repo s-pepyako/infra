@@ -2,8 +2,7 @@ provider "aws" {
   region = var.region
 }
 
-# Filter out local zones, which are not currently supported 
-# with managed node groups
+
 data "aws_availability_zones" "available" {
   filter {
     name   = "opt-in-status"
@@ -11,9 +10,11 @@ data "aws_availability_zones" "available" {
   }
 }
 
+
 locals {
   cluster_name = var.cluster_name
 }
+
 
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
@@ -41,6 +42,7 @@ module "vpc" {
     "kubernetes.io/role/internal-elb"             = 1
   }
 }
+
 
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
@@ -73,7 +75,6 @@ module "eks" {
 }
 
 
-# https://aws.amazon.com/blogs/containers/amazon-ebs-csi-driver-is-now-generally-available-in-amazon-eks-add-ons/ 
 data "aws_iam_policy" "ebs_csi_policy" {
   arn = "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy"
 }
@@ -88,6 +89,7 @@ module "irsa-ebs-csi" {
   role_policy_arns              = [data.aws_iam_policy.ebs_csi_policy.arn]
   oidc_fully_qualified_subjects = ["system:serviceaccount:kube-system:ebs-csi-controller-sa"]
 }
+
 
 resource "aws_eks_addon" "ebs-csi" {
   cluster_name             = module.eks.cluster_name
