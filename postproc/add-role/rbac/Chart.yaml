@@ -1,0 +1,8 @@
+---
+apiVersion: v2
+type: application
+name: add-rbac-role
+description: Adds RBAC role and role binding to manage defined namespace by given IAM
+
+version: 0.1.0
+appVersion: latest
