@@ -10,7 +10,7 @@ rules:
   verbs: ["*"]
 - apiGroups: ["networking.k8s.io","extensions", "apps"]
   resources: ["deployments", "replicasets","secrets","ingresses"]
-  verbs: ["get", "list", "watch", "create", "update", "delete"]
+  verbs: ["get", "list", "watch", "create", "update", "delete", "patch"]
 
 ---
 kind: RoleBinding
