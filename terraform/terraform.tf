@@ -2,13 +2,13 @@
 # SPDX-License-Identifier: MPL-2.0
 
 terraform {
-/*
-  cloud {
-    workspaces {
-      name = "learn-terraform-eks"
-    }
+
+  backend "s3" {
+    bucket                  = "terraform-state-bucket-8896-3802-0524"
+    key                     = "AWS-EKS-cluster"
+    region                  = "eu-central-1"
   }
-*/
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
