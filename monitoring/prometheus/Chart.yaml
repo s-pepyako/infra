@@ -1,0 +1,8 @@
+---
+apiVersion: v2
+type: application
+name: prometheus-momo
+description: prometheus-momo
+
+version: 0.0.1
+appVersion: latest
