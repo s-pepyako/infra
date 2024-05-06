@@ -1,0 +1,8 @@
+---
+apiVersion: v2
+type: application
+name: grafana-momo
+description: grafana-momo
+
+version: 0.0.1
+appVersion: latest
