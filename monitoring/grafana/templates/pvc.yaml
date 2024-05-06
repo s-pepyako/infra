@@ -6,15 +6,16 @@ metadata:
     type: local
 spec:
   accessModes:
-  - ReadWriteMany
-  claimRef:
-    name: grafana-pvc
+  - ReadWriteOnce
+ # claimRef:
+ #   name: grafana-pvc
   csi:
     driver: ebs.csi.aws.com
     fsType: ext4
-    volumeHandle: vol-02541591c014fce33
+    volumeHandle: vol-04f2348d37d343263
   capacity:
     storage: 1Gi
+  storageClassName: standard
 
 ---
 apiVersion: v1
@@ -28,3 +29,4 @@ spec:
   resources:
     requests:
       storage: 1Gi
+  storageClassName: standard

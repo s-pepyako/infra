@@ -35,3 +35,5 @@ spec:
             claimName: grafana-pvc
       securityContext:
         fsGroup: 472      
+      nodeSelector:
+        topology.kubernetes.io/zone: eu-central-1b

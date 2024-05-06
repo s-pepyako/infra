@@ -38,3 +38,5 @@ spec:
         configMap:
           defaultMode: 420
           name: prometheus-server-conf
+      nodeSelector:
+        topology.kubernetes.io/zone: eu-central-1b
